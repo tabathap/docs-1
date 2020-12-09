@@ -1,23 +1,7 @@
 <div class="border-bottom border-gray-light no-print">
-
-  {% if currentLanguage != 'en' and page.relativePath contains '/site-policy/' %}
-    {% assign header_notification_type = "translation_policy" %}
-    {% assign header_notification = site.data.reusables.policies.translation %}
-
-  {% elsif site.data.ui.header.notices.flags.localization_complete == true %}
-    {% assign header_notification_type = "localization_complete" %}
-    {% assign header_notification = site.data.ui.header.notices.localization_complete %}
-
-  {% elsif site.data.ui.header.notices.flags.localization_in_progress == true %}
-    {% assign header_notification_type = "localization_in_progress" %}
-    {% assign header_notification = site.data.ui.header.notices.localization_in_progress %}
-
-  {% elsif currentLanguage == 'en' and site.data.ui.header.notices.flags.product_in_progress == true %}
-    {% assign header_notification_type = "product_in_progress" %}
-    {% assign header_notification = site.data.ui.header.notices.product_in_progress %}
-  {% endif %}
-
+  {% unless error == '404' %}
   {% include header-notification %}
+  {% endunless %}
 
   <header class="container-xl px-3 px-md-6 pt-3 pb-2 position-relative d-flex flex-justify-between width-full {% if error == '404' %} d-md-none {% endif %}">
 
@@ -104,7 +88,7 @@
 
               <!-- GitHub.com homepage and 404 page has a stylized search; Enterprise homepages do not -->
               {% if page.relativePath != 'index.md' and error != '404' %}
-              <div class="pt-3 pt-md-0 d-md-inline-block ml-md-3 bord'er-top border-md-top-0">
+              <div class="pt-3 pt-md-0 d-md-inline-block ml-md-3 border-top border-md-top-0">
                 {% include search-form %}
                 <div id="search-results-container"></div>
                 <div class="search-overlay-desktop"></div>
